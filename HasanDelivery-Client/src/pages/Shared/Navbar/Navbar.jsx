@@ -9,33 +9,51 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : "text-black"
+            isActive
+              ? "text-red-500 font-bold"
+              : "text-black hover:text-red-400 transition"
           }
         >
           Home
         </NavLink>
       </li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2 bg-base-100 w-40 z-1">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
-      </li>
+
       <li>
         <NavLink
-          to="/item3"
+          to="/services"
           className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : "text-black"
+            isActive
+              ? "text-red-500 font-bold"
+              : "text-black hover:text-red-400 transition"
           }
         >
-          Item 3
+          Services
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive
+              ? "text-red-500 font-bold"
+              : "text-black hover:text-red-400 transition"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/coverage"
+          className={({ isActive }) =>
+            isActive
+              ? "text-red-500 font-bold"
+              : "text-black hover:text-red-400 transition"
+          }
+        >
+          Coverage
         </NavLink>
       </li>
     </>
