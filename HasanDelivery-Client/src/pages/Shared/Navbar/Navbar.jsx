@@ -1,8 +1,15 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import UseAuth from "../../../hooks/UseAuth";
 
 const Navbar = () => {
+  const { user, Logout } = UseAuth();
+
+  const handleLogout = () => {
+    Logout();
+  };
+
   const manueItems = (
     <>
       <li>
@@ -43,7 +50,18 @@ const Navbar = () => {
           About Us
         </NavLink>
       </li>
-
+      <li>
+        <NavLink
+          to="/send-parcel"
+          className={({ isActive }) =>
+            isActive
+              ? "text-red-500 font-bold"
+              : "text-black hover:text-red-400 transition"
+          }
+        >
+          Send Parcel
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="/coverage"
@@ -56,6 +74,20 @@ const Navbar = () => {
           Coverage
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            to="dashboard/my-parcel"
+            className={({ isActive }) =>
+              isActive
+                ? "text-red-500 font-bold"
+                : "text-black hover:text-red-400 transition"
+            }
+          >
+            My Parcels
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -95,8 +127,19 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{manueItems}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end gap-2">
+          {user ? (
+            <button onClick={handleLogout} className="btn btn-sm btn-soft">
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/auth/login" className="btn btn-sm  btn-soft">
+              Login
+            </Link>
+          )}
+          <Link to="/rider" className="btn btn-sm btn-error">
+            Be a Rider
+          </Link>
         </div>
       </div>
     </div>
