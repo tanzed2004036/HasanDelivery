@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import UseAuth from "./useAuth";
+import UseAuth from "./UseAuth";
 
 
 const axiosInstance = axios.create({
