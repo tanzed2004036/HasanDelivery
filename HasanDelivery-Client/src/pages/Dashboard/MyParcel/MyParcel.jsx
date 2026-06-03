@@ -1,5 +1,5 @@
 import React from "react";
-import axiosInstance from "../../../hooks/UserAxios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../hooks/UseAuth";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import { Link } from "react-router";
 
 export default function MyParcel() {
   const { user } = UseAuth();
-
+const axiosInstance = useAxiosSecure();
   const {
     data: parcels = [],
     isLoading,

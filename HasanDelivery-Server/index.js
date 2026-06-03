@@ -8,9 +8,34 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+//firebase service center
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./hasvery--firebase-adminsdk.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
 // middleware
 app.use(cors());
 app.use(express.json());
+
+// tokwn verification middleware
+const verifyToken = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).send({ message: "Unauthorized access" });
+  }
+  try {
+    const token = authHeader.split(" ")[1];
+    const decoded = await admin.auth().verifyIdToken(token);
+    req.decoded = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).send({ message: "Unauthorized access" });
+  }
+};
 
 // Tracking ID generation function
 function generateTrackingId() {
@@ -43,6 +68,16 @@ async function run() {
     const myDB = client.db("HasVery_DB"); //Database
     const parcelsCollection = myDB.collection("parcels");
     const paymentsCollection = myDB.collection("payemnts");
+    const usersCollection = myDB.collection("users");
+
+    //user related api
+    app.post("/users", async (req, res) => {
+      const newUser = req.body;
+      newUser.role = "customer";
+      newUser.createdAt = new Date();
+      const result = await usersCollection.insertOne(newUser);
+      res.send(result);
+    });
 
     // GET all parcel or specific user parcel
     app.get("/parcels", async (req, res) => {
@@ -204,18 +239,22 @@ async function run() {
     });
 
     // get email specific payment history
-    app.get("/payments", async (req, res) => {
+    app.get("/payments", verifyToken, async (req, res) => {
       try {
         const email = req.query.email;
 
         const query = { customer_email: email };
+
+        if (req.decoded.email !== email) {
+          return res.status(403).send({ message: "Forbidden access" });
+        }
 
         const payments = await paymentsCollection
           .find(query)
           .sort({ paidAt: -1 })
           .toArray();
 
-        res.send( payments,);
+        res.send(payments);
       } catch (error) {
         console.error(error);
         res.status(500).send({

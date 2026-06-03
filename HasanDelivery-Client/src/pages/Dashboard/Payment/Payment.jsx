@@ -1,11 +1,12 @@
 import React from "react";
-import axiosInstance from "../../../hooks/UserAxios";
+
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 export default function Payment() {
   const { parcelId } = useParams();
-
+const axiosInstance = useAxiosSecure();
   const { data: parcel, isLoading } = useQuery({
     queryKey: ["parcel", parcelId],
     queryFn: async () => {

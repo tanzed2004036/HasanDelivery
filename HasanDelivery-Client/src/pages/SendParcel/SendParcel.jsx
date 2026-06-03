@@ -2,8 +2,9 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import axiosInstance from "../../hooks/UserAxios";
+
 import UseAuth from "../../hooks/UseAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SendParcel = () => {
   const {
@@ -15,6 +16,7 @@ const SendParcel = () => {
 
   const { user } = UseAuth();
   const navigate  = useNavigate()
+  const axiosInstance = useAxiosSecure();
 
   // region array
   const ServiceCenters = useLoaderData();

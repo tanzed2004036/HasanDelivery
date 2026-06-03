@@ -4,6 +4,7 @@ import UseAuth from "../../../hooks/UseAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
   const {
@@ -13,6 +14,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const axiosInstance = useAxiosSecure();
   const { RegisterUser, UpdateUserProfile, SendVerificationMail } = UseAuth();
 
   const location = useLocation();
@@ -23,27 +25,54 @@ const Register = () => {
     try {
       const profileImage = data.photo?.[0];
 
-      const result = await RegisterUser(data.email, data.password);
+      // 1. Firebase register user
+      const userCredential = await RegisterUser(data.email, data.password);
 
+      const user = userCredential.user;
+
+      // 2. Send verification email
       await SendVerificationMail();
 
+      // 3. Upload image to imgbb
       const formData = new FormData();
       formData.append("image", profileImage);
 
       const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_host}`;
 
-      const res = await axios.post(imageApiUrl, formData);
+      const imgRes = await axios.post(imageApiUrl, formData);
+      const imageUrl = imgRes.data.data.display_url;
 
+      // 4. IMPORTANT: Check email verification before DB save
+      if (!user.emailVerified) {
+        alert("Please verify your email before continuing.");
+
+        // optional: logout user
+        await Logout();
+
+        return;
+      }
+
+      // 5. Save user in backend database
+      const dbRes = await axiosInstance.post("/users", {
+        name: data.name,
+        email: data.email,
+        photo: imageUrl,
+      });
+
+      console.log("DB saved:", dbRes.data);
+
+      // 6. Update Firebase profile
       const UserProfile = {
         displayName: data.name,
-        photoURL: res.data.data.display_url,
+        photoURL: imageUrl,
       };
 
       await UpdateUserProfile(UserProfile);
 
+      // 7. Redirect
       navigate(from, { replace: true });
     } catch (error) {
-      console.log(error.message);
+      console.log("Register error:", error.message);
     }
   };
 

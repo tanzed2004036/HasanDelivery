@@ -1,7 +1,12 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import UseAuth from "../hooks/UseAuth";
 
 const DaashboardLayout = () => {
+
+
+  const {user} = UseAuth()
+
   return (
     <div className="drawer lg:drawer-open  max-w-7xl mx-auto min-h-screen pt-4">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -99,36 +104,7 @@ const DaashboardLayout = () => {
               </NavLink>
             </li>
 
-            {/* payment */}
-            <li>
-              <NavLink
-                to={"/dashboard/payment/"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary font-bold"
-                    : "is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                }
-                data-tip="My Parcels"
-              >
-                {/* Parcel icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M11 21H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v2"></path>
-                  <path d="m14 11 3 3-3 3"></path>
-                  <path d="M17 14H9"></path>
-                </svg>
-
-                <span className="is-drawer-close:hidden">Payment</span>
-              </NavLink>
-            </li>
+            
 
             {/*oayment History  */}
             <li>
