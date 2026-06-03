@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../components/Logo/Logo'
 import { Outlet } from 'react-router'
-import authimage from '../assets/authimage.png'
+import authimage from '../assets/authImage.png'
 const AuthLayout = () => {
   return (
     <div class='max-w-7xl mx-auto min-h-screen pt-4'>
