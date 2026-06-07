@@ -15,7 +15,7 @@ const Register = () => {
   } = useForm();
 
   const axiosInstance = useAxiosSecure();
-  const { RegisterUser, UpdateUserProfile, SendVerificationMail } = UseAuth();
+  const { RegisterUser, UpdateUserProfile, SendVerificationMail, Logout } = UseAuth();
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -43,14 +43,14 @@ const Register = () => {
       const imageUrl = imgRes.data.data.display_url;
 
       // 4. IMPORTANT: Check email verification before DB save
-      if (!user.emailVerified) {
-        alert("Please verify your email before continuing.");
+      // if (!user.emailVerified) {
+      //   alert("Please verify your email before continuing.");
 
-        // optional: logout user
-        await Logout();
+      //   // optional: logout user
+      //   await Logout();
 
-        return;
-      }
+      //   return;
+      // }
 
       // 5. Save user in backend database
       const dbRes = await axiosInstance.post("/users", {

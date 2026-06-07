@@ -2,6 +2,7 @@ import React from "react";
 import UseAuth from "../../../hooks/UseAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 
 export default function PaymentHistory() {

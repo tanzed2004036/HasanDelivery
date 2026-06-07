@@ -80,7 +80,7 @@ const axiosInstance = useAxiosSecure();
             {parcels.map((Parcel, key) => (
               <tr>
                 <td>{key + 1}</td>
-                <td>{Parcel.parcelName}</td>
+                <td><Link to={`/track-parcel/${Parcel.trackingId}`}>{Parcel.parcelName}</Link></td>
                 <td>{Parcel.parcelType}</td>
                 <td>{Parcel.cost}</td>
                 <td>
@@ -90,7 +90,7 @@ const axiosInstance = useAxiosSecure();
                       <button onClick={()=>handlePayButton(Parcel)} className="btn btn-primary btn-sm">Pay</button>
                   )}
                 </td>
-                <td>delivery.status</td>
+                <td>{Parcel.deliveryStatus}</td>
                 <td className="flex gap-2">
                   {/* Edit */}
                   <button className="btn btn-sm btn-info" title="Edit">

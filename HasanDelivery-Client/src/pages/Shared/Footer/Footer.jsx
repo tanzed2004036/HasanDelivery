@@ -8,9 +8,9 @@ const Footer = () => {
         <aside>
           <Logo></Logo>
           <p className="font-bold">
-            ACME Industries Ltd.
+            TH Industries Ltd.
             <br />
-            Providing reliable tech since 1992
+            Providing reliable service 
           </p>
           <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
         </aside>

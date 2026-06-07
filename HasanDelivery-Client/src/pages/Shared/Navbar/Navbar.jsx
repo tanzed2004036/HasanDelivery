@@ -77,14 +77,14 @@ const Navbar = () => {
       {user && (
         <li>
           <NavLink
-            to="dashboard/my-parcel"
+            to="/dashboard"
             className={({ isActive }) =>
               isActive
                 ? "text-red-500 font-bold"
                 : "text-black hover:text-red-400 transition"
             }
           >
-            My Parcels
+            Dashboard
           </NavLink>
         </li>
       )}
