@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+import UseAuth from "../../../hooks/UseAuth";
 
 
 export default function RiderDashboardHome() {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth()
+  const {user} = UseAuth()
   const { data = [], isLoading } = useQuery({
     queryKey: ["rider-delivery-per-day"],
     queryFn: async () => {
