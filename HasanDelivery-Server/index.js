@@ -321,7 +321,7 @@ async function run() {
       newParcel.atCreated = new Date();
       const trackingId = generateTrackingId();
       newParcel.trackingId = trackingId;
-      logTracking(trackingId, "parcel_created");
+      // logTracking(trackingId, "parcel_created");
       const result = await parcelsCollection.insertOne(newParcel);
       res.send(result);
     });
