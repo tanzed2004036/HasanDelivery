@@ -13,8 +13,7 @@ const admin = require("firebase-admin");
 
 // const serviceAccount = require("./hasvery--firebase-adminsdk.json");
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-serviceAccount.private_key =
-  serviceAccount.private_key.replace(/\\n/g, "\n");
+serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, "\n");
 
 // const decoded = Buffer.from(process.env.FB_SERVICE_KEY, 'base64').toString('utf8')
 // const serviceAccount = JSON.parse(decoded);
@@ -564,6 +563,15 @@ async function run() {
           message: error.message,
         });
       }
+    });
+    // Delete payment api
+    app.delete("/payments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+
+      const result = await paymentsCollection.deleteOne(query);
+
+      res.send(result);
     });
 
     // tracking API

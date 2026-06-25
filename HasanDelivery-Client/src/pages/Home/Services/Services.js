@@ -1,38 +1,53 @@
+import {
+  FaTruck,
+  FaMapMarkedAlt,
+  FaBoxOpen,
+  FaMoneyBillWave,
+  FaStore,
+  FaHeadset,
+} from "react-icons/fa";
+
 export const services = [
   {
     id: 1,
-    logo: "https://img.icons8.com/?size=100&id=1",
-    title: "Express  & Standard Delivery",
-    description: "We deliver parcels within 24–72 hours in Dhaka, Chittagong, Sylhet, Khulna, and Rajshahi.  Express delivery available in Dhaka within 4–6 hours from pick-up to drop-off."
+    icon: FaTruck,
+    title: "Express & Standard Delivery",
+    description:
+      "Fast and reliable parcel delivery across Bangladesh with both express and standard shipping options."
   },
   {
     id: 2,
-    logo: "https://img.icons8.com/?size=100&id=2",
-    title: "App Development",
-    description: "Mobile apps for Android and iOS."
+    icon: FaMapMarkedAlt,
+    title: "Nationwide Coverage",
+    description:
+      "We deliver parcels to all 64 districts, ensuring your shipments reach every corner of the country."
   },
   {
     id: 3,
-    logo: "https://img.icons8.com/?size=100&id=3",
-    title: "UI/UX Design",
-    description: "Clean and user-friendly designs."
+    icon: FaBoxOpen,
+    title: "Door-to-Door Pickup",
+    description:
+      "Schedule parcel pickups directly from your home, office, or business location for maximum convenience."
   },
   {
     id: 4,
-    logo: "https://img.icons8.com/?size=100&id=4",
-    title: "SEO",
-    description: "Improve your website ranking."
+    icon: FaMoneyBillWave,
+    title: "Cash on Delivery (COD)",
+    description:
+      "Securely collect payments from customers with our trusted Cash on Delivery service."
   },
   {
     id: 5,
-    logo: "https://img.icons8.com/?size=100&id=5",
-    title: "Marketing",
-    description: "Grow your business online."
+    icon: FaStore,
+    title: "E-commerce Solutions",
+    description:
+      "Dedicated logistics support for online businesses, including bulk parcel handling and quick delivery."
   },
   {
     id: 6,
-    logo: "https://img.icons8.com/?size=100&id=6",
-    title: "Support",
-    description: "24/7 customer support."
+    icon: FaHeadset,
+    title: "24/7 Customer Support",
+    description:
+      "Our support team is always available to assist you with tracking, delivery updates, and service inquiries."
   }
 ];

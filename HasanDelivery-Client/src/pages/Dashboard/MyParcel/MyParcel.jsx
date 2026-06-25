@@ -7,7 +7,7 @@ import { Link } from "react-router";
 
 export default function MyParcel() {
   const { user } = UseAuth();
-const axiosInstance = useAxiosSecure();
+  const axiosInstance = useAxiosSecure();
   const {
     data: parcels = [],
     isLoading,
@@ -19,6 +19,26 @@ const axiosInstance = useAxiosSecure();
       return res.data;
     },
   });
+
+  // handle details button
+  const handleDetails = (parcel) => {
+    Swal.fire({
+      title: parcel.parcelName,
+      html: `
+      <div style="text-align:left">
+        <p><b>Type:</b> ${parcel.parcelType}</p>
+        <p><b>Price:</b> ${parcel.cost} BDT</p>
+        <p><b>Payment Status:</b> ${
+          parcel.paymentStatus ? "Paid" : "Unpaid"
+        }</p>
+        <p><b>Delivery Status:</b> ${parcel.deliveryStatus}</p>
+        <p><b>Tracking ID:</b> ${parcel.trackingId}</p>
+      </div>
+    `,
+      icon: "info",
+      confirmButtonText: "Close",
+    });
+  };
 
   // handle delete
   const HandleDelet = (id) => {
@@ -46,7 +66,7 @@ const axiosInstance = useAxiosSecure();
     });
   };
 
-  //handel pay 
+  //handel pay
   const handlePayButton = async (parcel) => {
     const paymentInfo = {
       cost: parcel.cost,
@@ -55,8 +75,11 @@ const axiosInstance = useAxiosSecure();
       parcelName: parcel.parcelName,
     };
 
-    const res = await axiosInstance.post('/create-checkout-session',paymentInfo);
-    window.location.href = res.data.url
+    const res = await axiosInstance.post(
+      "/create-checkout-session",
+      paymentInfo,
+    );
+    window.location.href = res.data.url;
   };
 
   return (
@@ -80,37 +103,29 @@ const axiosInstance = useAxiosSecure();
             {parcels.map((Parcel, key) => (
               <tr>
                 <td>{key + 1}</td>
-                <td><Link to={`/track-parcel/${Parcel.trackingId}`}>{Parcel.parcelName}</Link></td>
+                <td>
+                  <Link to={`/track-parcel/${Parcel.trackingId}`}>
+                    {Parcel.parcelName}
+                  </Link>
+                </td>
                 <td>{Parcel.parcelType}</td>
                 <td>{Parcel.cost}</td>
                 <td>
                   {Parcel.paymentStatus ? (
                     <span className="text-green-500">Paid</span>
                   ) : (
-                      <button onClick={()=>handlePayButton(Parcel)} className="btn btn-primary btn-sm">Pay</button>
+                    <button
+                      onClick={() => handlePayButton(Parcel)}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Pay
+                    </button>
                   )}
                 </td>
                 <td>{Parcel.deliveryStatus}</td>
                 <td className="flex gap-2">
-                  {/* Edit */}
-                  <button className="btn btn-sm btn-info" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      fill="none"
-                      stroke="currentColor"
-                      className="size-4"
-                    >
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                  </button>
-
                   {/* Details */}
-                  <button className="btn btn-sm btn-success" title="Details">
+                  <button className="btn btn-sm btn-success" title="Details" onClick={() => handleDetails(Parcel)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"

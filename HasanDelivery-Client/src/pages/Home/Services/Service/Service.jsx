@@ -1,6 +1,8 @@
 import React from "react";
 
 const Service = ({ service, active, onClick }) => {
+  const Icon = service.icon;
+
   return (
     <div
       onClick={onClick}
@@ -11,17 +13,16 @@ const Service = ({ service, active, onClick }) => {
           : "bg-base-100 hover:bg-gray-100"
       }`}
     >
-      <img
-        src={service.logo}
-        alt={service.title}
-        className="w-5 lg:w-16 mx-auto"
-      />
+      {/* ICON instead of image */}
+      <div className="flex justify-center">
+        <Icon className="text-3xl lg:text-5xl text-emerald-600" />
+      </div>
 
       <h2 className="text-xs lg:text-xl font-bold text-center mt-2 sm:mt-4">
         {service.title}
       </h2>
 
-      <p className="text-[10px]  lg:text-sm text-center mt-1 sm:mt-2 ">
+      <p className="text-[10px] lg:text-sm text-center mt-1 sm:mt-2">
         {service.description}
       </p>
     </div>
