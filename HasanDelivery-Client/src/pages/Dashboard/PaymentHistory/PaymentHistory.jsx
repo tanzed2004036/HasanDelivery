@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 export default function PaymentHistory() {
   const { user } = UseAuth();
   const axiosInstance = useAxiosSecure();
-  const { data: payments = [], isLoading } = useQuery({
+  const { data: payments = [], isLoading,refetch  } = useQuery({
     queryKey: ["payments", user?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(`/payments?email=${user?.email}`);
