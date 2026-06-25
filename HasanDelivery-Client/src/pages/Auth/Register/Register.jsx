@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import UseAuth from "../../../hooks/UseAuth";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -7,15 +7,17 @@ import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
+  // const [loading, setLoading]=useState(false);
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const axiosInstance = useAxiosSecure();
-  const { RegisterUser, UpdateUserProfile, SendVerificationMail, Logout } = UseAuth();
+  const { RegisterUser, UpdateUserProfile, SendVerificationMail, Logout } =
+    UseAuth();
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -145,7 +147,20 @@ const Register = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            <button className="btn btn-neutral mt-4">Register</button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn btn-neutral mt-4"
+            >
+              {isSubmitting ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Signing up...
+                </>
+              ) : (
+                "Register"
+              )}
+            </button>
           </fieldset>
           <p className="text-sm text-gray-600 mt-3 text-center">
             Already have an account?{" "}

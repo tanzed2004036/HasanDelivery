@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import UseAuth from "../../../hooks/UseAuth";
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
+  const [logging, setLogging]= useState(false)
   const {
     register,
     handleSubmit,
@@ -12,15 +13,16 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { SigninUser,ResetPassMail } = UseAuth();
+  const { SigninUser, ResetPassMail } = UseAuth();
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
 
   // sign in form handle function
-  const SigninOnSubmit = (data) => {
+  const SigninOnSubmit =  (data) => {
     console.log(data);
+    setLogging(true)
     SigninUser(data.email, data.password)
       .then((result) => {
         // console.log("User signed in:", result.user);
@@ -40,7 +42,6 @@ const Login = () => {
 
   // forget password handle
   const handleForgetPass = () => {
-
     //get email from form
     const email = watch("email");
 
@@ -93,9 +94,24 @@ const Login = () => {
               <p className="text-red-500">Password is required</p>
             )}
             <div>
-              <a onClick={handleForgetPass} className="link link-hover">Forgot password?</a>
+              <a onClick={handleForgetPass} className="link link-hover">
+                Forgot password?
+              </a>
             </div>
-            <button className="btn btn-neutral mt-4">Login</button>
+            <button
+              type="submit"
+              disabled={logging}
+              className="btn btn-neutral mt-4"
+            >
+              {logging ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Logging in...
+                </>
+              ) : (
+                "Login"
+              )}
+            </button>
           </fieldset>
           <p className="text-sm text-gray-600 mt-3 text-center">
             New to HasVery?{" "}
