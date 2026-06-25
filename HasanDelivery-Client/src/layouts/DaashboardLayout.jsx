@@ -131,7 +131,7 @@ const DaashboardLayout = () => {
                     ? "is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary font-bold"
                     : "is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 }
-                data-tip="Rider Approvals"
+                data-tip="Payment History"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

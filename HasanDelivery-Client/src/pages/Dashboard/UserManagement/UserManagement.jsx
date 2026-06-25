@@ -32,24 +32,50 @@ export default function UserManagement() {
   }
 
   // ✅ Change Role
-  const handleMakeAdmin = (id) => {
-    axiosInstance.patch(`/users/${id}/role`, { role: "admin" }).then((res) => {
-      if (res.data.modifiedCount) {
-        Swal.fire("Success", "User promoted to admin", "success");
-        refetch();
-      }
+  const handleMakeAdmin = async (id) => {
+    const result = await Swal.fire({
+      title: "Make this user admin?",
+      text: "They will get full admin access!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Make Admin",
     });
+
+    if (!result.isConfirmed) return;
+
+    const res = await axiosInstance.patch(`/users/${id}/role`, {
+      role: "admin",
+    });
+
+    if (res.data.modifiedCount) {
+      Swal.fire("Success", "User promoted to admin", "success");
+      refetch();
+    }
   };
 
-  const handleRemoveAdmin = (id) => {
-    axiosInstance
-      .patch(`/users/${id}/role`, { role: "customer" })
-      .then((res) => {
-        if (res.data.modifiedCount) {
-          Swal.fire("Success", "Admin removed", "success");
-          refetch();
-        }
-      });
+  const handleRemoveAdmin = async (id) => {
+    const result = await Swal.fire({
+      title: "Remove admin role?",
+      text: "They will become a normal user again!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Remove",
+    });
+
+    if (!result.isConfirmed) return;
+
+    const res = await axiosInstance.patch(`/users/${id}/role`, {
+      role: "customer",
+    });
+
+    if (res.data.modifiedCount) {
+      Swal.fire("Success", "Admin removed", "success");
+      refetch();
+    }
   };
 
   // ✅ Delete User
@@ -107,9 +133,13 @@ export default function UserManagement() {
             <path d="m21 21-4.3-4.3"></path>
           </g>
         </svg>
-        <input 
-        value={searchText}
-        onChange={(e)=>setSearchText(e.target.value)} type="search" className="grow" placeholder="Search" />
+        <input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          type="search"
+          className="grow"
+          placeholder="Search"
+        />
       </label>
 
       <div className="overflow-x-auto">

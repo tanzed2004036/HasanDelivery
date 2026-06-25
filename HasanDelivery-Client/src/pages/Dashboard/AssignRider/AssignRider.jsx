@@ -51,9 +51,12 @@ export default function AssignRider() {
   };
 
   return (
-    <div>
-      assign rider
-      <h1>{allparcels.length}</h1>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">
+        Assign Riders
+      </h2>
+      
+      <h1>Total parcel : {allparcels.length}</h1>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
