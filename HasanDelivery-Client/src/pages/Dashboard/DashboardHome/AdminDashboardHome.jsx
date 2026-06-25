@@ -18,57 +18,57 @@ export default function AdminDashboardHome() {
   }
 
   return (
-    <div className=" w-full">  
-      <div className='mx-auto my-10 stats shadow gap-2'>
-        {stats.map((item) => (
-          <div className="stat bg-amber-50" >
-            <div className="stat-figure text-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block h-8 w-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                ></path>
-              </svg>
-            </div>
-            <div className="stat-title">{item.status}</div>
-            <div className="stat-value text-secondary">{item.count}</div>
-            <div className="stat-desc">Total Parcels</div>
-          </div>
-        ))}
-      </div>
-       {/* Pie Chart
-       <div className="flex justify-center">
-        <PieChart width={500} height={350}>
-          <Pie
-            data={stats}
-            dataKey="count"
-            nameKey="status"
-            startAngle={180}
-            endAngle={0}
-            cx="50%"
-            cy="100%"
-            outerRadius={150}
-            label
-          >
-            {stats.map((_, index) => (
-              <Cell
-                key={index}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
+  <div className="w-full p-4 md:p-8">
+    {/* Heading */}
+    <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+      Delivery Statistics
+    </h1>
 
-          <Tooltip />
-          <Legend />
-        </PieChart>
-      </div> */}
+    {/* Stats Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {stats.map((item, index) => (
+        <div
+          key={index}
+          className="bg-amber-50 rounded-xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg transition"
+        >
+          <div className="text-secondary mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-10 w-10 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+          </div>
+
+          <div className="text-sm text-gray-500 capitalize">
+            {item.status}
+          </div>
+
+          <div className="text-2xl md:text-3xl font-bold text-secondary">
+            {item.count}
+          </div>
+
+          <div className="text-xs text-gray-400 mt-1">
+            Total Parcels
+          </div>
+        </div>
+      ))}
     </div>
-  );
+
+    {/* Pie Chart Section */}
+    <div className="mt-10 flex justify-center">
+      {/* PieChart container responsive */}
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg">
+        {/* PieChart will go here */}
+      </div>
+    </div>
+  </div>
+);
 }

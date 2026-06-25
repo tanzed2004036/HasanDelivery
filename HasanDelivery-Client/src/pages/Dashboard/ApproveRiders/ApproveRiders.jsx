@@ -20,6 +20,8 @@ export default function ApproveRiders() {
     },
   });
 
+  const pendingRiders = riders.filter((rider) => rider.status === "pending");
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[300px]">
@@ -28,53 +30,94 @@ export default function ApproveRiders() {
     );
   }
 
-  const handleApprove = (rider) => {
-    const updatedInfo = { status: "approved", email: rider.email };
-
-    axiosInstance.patch(`/riders/${rider._id}`, updatedInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Rider approved successfully!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        refetch();
-      }
+  const handleApprove = async (rider) => {
+    const result = await Swal.fire({
+      title: "Approve Rider?",
+      text: `Are you sure you want to approve ${rider.name}?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Approve",
     });
+
+    if (!result.isConfirmed) return;
+
+    const updatedInfo = {
+      status: "approved",
+      email: rider.email,
+    };
+
+    const res = await axiosInstance.patch(`/riders/${rider._id}`, updatedInfo);
+
+    if (res.data.modifiedCount) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Rider approved successfully!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+
+      refetch();
+    }
   };
 
-  const handleReject = (riderId) => {
-    const updatedStatus = "rejected";
+  const handleReject = async (rider) => {
+    const result = await Swal.fire({
+      title: "Reject Rider?",
+      text: `Are you sure you want to reject ${rider.name}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Reject",
+    });
 
-    axiosInstance
-      .patch(`/riders/${riderId}`, { status: updatedStatus })
-      .then((res) => {
-        if (res.data.modifiedCount) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Rider rejected successfully!",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-          refetch();
-        }
+    if (!result.isConfirmed) return;
+
+    const res = await axiosInstance.patch(`/riders/${rider._id}`, {
+      status: "rejected",
+    });
+
+    if (res.data.modifiedCount) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Rider rejected successfully!",
+        showConfirmButton: false,
+        timer: 1000,
       });
+
+      refetch();
+    }
   };
 
   const handleDelete = (riderId) => {
-    axiosInstance.delete(`/riders/${riderId}`).then((res) => {
-      if (res.data.deletedCount) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Rider deleted successfully!",
-          showConfirmButton: false,
-          timer: 1000,
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This rider will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/riders/${riderId}`).then((res) => {
+          if (res.data.deletedCount) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Rider deleted successfully!",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+
+            refetch();
+          }
         });
-        refetch();
       }
     });
   };
@@ -104,7 +147,7 @@ export default function ApproveRiders() {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">
-        Pending Riders ({riders.length})
+        Pending Riders ({pendingRiders.length})
       </h2>
 
       <div className="overflow-x-auto">
@@ -141,9 +184,7 @@ export default function ApproveRiders() {
                     {rider.status}
                   </span>
                 </td>
-                <td>
-                  {rider.workingStatus}
-                </td>
+                <td>{rider.workingStatus}</td>
                 <td className="flex gap-2">
                   <button
                     onClick={() => handleApprove(rider)}

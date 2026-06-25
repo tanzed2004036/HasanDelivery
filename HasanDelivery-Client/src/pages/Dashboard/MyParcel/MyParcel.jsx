@@ -83,8 +83,10 @@ export default function MyParcel() {
   };
 
   return (
-    <div>
-      my parcel
+    <div className="p-4">
+    <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+      My Parcel
+    </h1>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

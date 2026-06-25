@@ -39,8 +39,10 @@ export default function PaymentHistory() {
   };
 
   return (
-    <div>
-      <h2>Payment History</h2>
+    <div className="p-4">
+    <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+      Payment History
+    </h1>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">
