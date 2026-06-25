@@ -21,14 +21,14 @@ const Coverage = () => {
   }
 
   return (
-    <div>
+    <div className="my-1">
       <div>
-        <h1>We are available in 64 districts</h1>
+        <h1 className="font-semibold my-1">We are available in 64 districts</h1>
       </div>
       {/* searchbar */}
       <div>
         <form onSubmit={searchHandle}>
-          <label className="input">
+          <label className="input  my-1">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,7 @@ const Coverage = () => {
               </g>
             </svg>
             <input name="location" type="search" className="grow" placeholder="Search" />
-            <kbd className="kbd kbd-sm">⌘</kbd>
-            <kbd className="kbd kbd-sm">K</kbd>
+            
           </label>
         </form>
       </div>

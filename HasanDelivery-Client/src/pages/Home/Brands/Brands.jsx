@@ -22,9 +22,9 @@ const companies = [amazon, casio, moonstar, amazon_vector, ranstad, star, start_
 
 const Brands = () => {
   return (
-    <div className='py-5 px-20'>
+    <div className='py-2 px-2 md:px-20'>
 
-        <h1 className='text-center text-2xl font-bold pb-8'>We have helps thousands of sales feams</h1>
+        <h1 className='text-[10px] text-center md:text-2xl font-bold pb-8'>We have helps thousands of sales feams</h1>
       <Swiper
         modules={[ Autoplay]} // ✅ Autoplay add
         spaceBetween={50}

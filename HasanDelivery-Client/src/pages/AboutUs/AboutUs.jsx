@@ -32,22 +32,22 @@ const AboutUs = () => {
   const active = tabs.find((tab) => tab.key === activeTab);
 
   return (
-    <div className=" px-2 bg-white rounded-2xl border border-gray-100 p-8  shadow-sm my-5 md:my-10 px-20">
+    <div className=" px-2 bg-white rounded-2xl border border-gray-100 py-2 md:py-8  shadow-sm my-5 md:my-10 px-2 md:px-20">
       <div className="my-3">
-        <h1 className="text-4xl font-semibold">About us</h1>
-        <p className="text-gray-500 text-xs leading-relaxed">
+        <h1 className="text-[10px] md:text-4xl font-semibold">About us</h1>
+        <p className="text-gray-500 text-[6px] md:text-xs leading-relaxed">
           Enjoy fast, reliable parcel delivery with real-time tracking and zero
           hassle. From personal packages to business shipments — we deliver on
           time, every time.
         </p>
       </div>
       {/* Tab Buttons */}
-      <div className="flex  gap-2 mb-6">
+      <div className="flex flex-col md:flex-row gap-2 mb-6">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition border ${
+            className={`px-2 md:px-5 py-2 rounded-full text-sm font-medium transition border ${
               activeTab === tab.key
                 ? "bg-red-500 text-white border-red-500"
                 : "bg-white text-gray-600 border-gray-200 hover:border-red-400 hover:text-red-400"
@@ -59,7 +59,7 @@ const AboutUs = () => {
       </div>
       {/* Content */}
       <div className="">
-        <p className="text-gray-500 text-sm leading-relaxed text-justify">{active.content}</p>
+        <p className="text-gray-500 text-[6px] md:text-sm leading-relaxed text-justify">{active.content}</p>
       </div>
     </div>
   );

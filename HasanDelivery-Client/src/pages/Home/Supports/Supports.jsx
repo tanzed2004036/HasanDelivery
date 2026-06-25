@@ -24,30 +24,30 @@ const SupportArray = [
 ];
 const Supports = () => {
   return (
-    <div className=" py-10 px-20">
+    <div className=" py-2 md:py-10 px-2 md:px-20">
       {SupportArray.map((support, index) => (
         <div
           key={index}
-          className="flex my-3 items-center  bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition p-6 gap-4"
+          className="flex my-3 items-center  bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition p-2 md:p-6 gap-4"
         >
           {/* Icon */}
           <div className=" rounded-xl p-4">
             <img
-              className="h-25 w-25 object-contain"
+              className="h-10 w-10 md:h-25 md:w-25 object-contain"
               src={support.img}
               alt={support.title}
             />
           </div>
 
           {/* Divider */}
-            <div className="border-l-2 border-dashed border-gray-300 h-16"></div>
+            <div className="border-l-2 border-dashed border-gray-300 md:h-16"></div>
 
           {/* Text */}
           <div className="flex flex-col gap-2">
-            <h2 className="text-base font-semibold text-gray-800">
+            <h2 className="text-[10px] md:text-base font-semibold text-gray-800">
               {support.title}
             </h2>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-[6px] md:text-sm text-gray-500 leading-relaxed">
               {support.description}
             </p>
           </div>

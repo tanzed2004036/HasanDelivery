@@ -118,6 +118,9 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {manueItems}
+              <li className="lg:hidden">
+                <Link to="/rider">Be a Rider</Link>
+              </li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">
@@ -129,15 +132,21 @@ const Navbar = () => {
         </div>
         <div className="navbar-end gap-2">
           {user ? (
-            <button onClick={handleLogout} className="btn btn-sm btn-soft">
+            <button
+              onClick={handleLogout}
+              className="btn btn-xs sm:btn-sm btn-soft"
+            >
               Sign Out
             </button>
           ) : (
-            <Link to="/auth/login" className="btn btn-sm  btn-soft">
+            <Link to="/auth/login" className="btn btn-xs sm:btn-sm btn-soft">
               Login
             </Link>
           )}
-          <Link to="/rider" className="btn btn-sm btn-error">
+          <Link
+            to="/rider"
+            className="hidden lg:inline-flex btn btn-sm btn-error"
+          >
             Be a Rider
           </Link>
         </div>

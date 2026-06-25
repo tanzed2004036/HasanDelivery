@@ -40,7 +40,7 @@ const DaashboardLayout = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="px-4">DashBorad</div>
         </nav>
         {/* Page content here */}
         <Outlet></Outlet>

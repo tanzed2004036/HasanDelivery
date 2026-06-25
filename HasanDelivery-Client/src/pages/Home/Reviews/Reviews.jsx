@@ -17,7 +17,7 @@ const Reviews = ({ ReviewData }) => {
   return (
     <div>
       <div>
-        <h1>Reviews</h1>
+        <h1 className="text-[10px] md:text-2xl font-bold pl-2">Reviews</h1>
       </div>
       <Swiper
         effect={"coverflow"}

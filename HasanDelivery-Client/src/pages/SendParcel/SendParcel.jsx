@@ -84,10 +84,10 @@ const SendParcel = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-gray-50 w-full border-2"
+        className="bg-gray-50 w-full border-2 rounded-xl p-2 "
       >
         {/* Parcel Type */}
-        <div className="flex rounded-xl p-4 mb-4">
+        <div className="flex flex-col gap-2 md:flex-row rounded-xl p-4 mb-4">
           <label className="flex items-center gap-2 px-5 py-2 rounded-full border border-blue-500 bg-blue-50 text-blue-800 text-sm font-semibold cursor-pointer">
             <input
               type="radio"
@@ -100,7 +100,7 @@ const SendParcel = () => {
             📄 Document
           </label>
 
-          <label className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 bg-white text-gray-500 text-sm cursor-pointer">
+          <label className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 bg-white text-gray-500  text-sm cursor-pointer">
             <input
               type="radio"
               name="parcelType"
