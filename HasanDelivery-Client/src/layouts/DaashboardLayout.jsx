@@ -248,9 +248,14 @@ const DaashboardLayout = () => {
 
             {/* List item */}
             <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
+              <NavLink
+              to={"/dashboard/profile"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary font-bold"
+                        : "is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    }
+                data-tip="Profile"
               >
                 {/* Settings icon */}
                 <svg
@@ -268,8 +273,8 @@ const DaashboardLayout = () => {
                   <circle cx="17" cy="17" r="3"></circle>
                   <circle cx="7" cy="7" r="3"></circle>
                 </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
-              </button>
+                <span className="is-drawer-close:hidden">Profile</span>
+              </NavLink>
             </li>
           </ul>
         </div>
