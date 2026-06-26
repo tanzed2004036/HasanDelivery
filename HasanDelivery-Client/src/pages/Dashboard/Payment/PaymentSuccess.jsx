@@ -6,40 +6,60 @@ export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const [paymentInfo, setPaymentInfo] = useState(null);
   const sessionId = searchParams.get("session_id");
-const axiosInstance = useAxiosSecure();
+  const axiosInstance = useAxiosSecure();
+
   useEffect(() => {
     if (sessionId) {
       axiosInstance
         .patch(`/payment-success?session_id=${sessionId}`)
         .then((res) => {
-          console.log(res.data);
           setPaymentInfo(res.data);
         });
     }
   }, [sessionId]);
 
   return (
-    <div>
-      <h1 className="text-4xl text-green-600 text-center">
-        Payment Successfull
-      </h1>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-base-200">
+      <div className="w-full max-w-md bg-base-100 shadow-xl rounded-2xl p-6 md:p-8 text-center">
 
-      <div className="flex items-center justify-center mt-10">
-        <h2 className="m-3 p-5 border">
-          <span className="font-bold text-xl">tracking id : </span>
-          {paymentInfo?.trackingId}
-        </h2>
+        {/* Success Icon */}
+        <div className="text-green-500 text-5xl mb-4">✅</div>
 
-        <h2 className="m-3 p-5 border">
-          <span className="font-bold text-xl">transaction id :</span>
-          {paymentInfo?.transactionId}
-        </h2>
-      </div>
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl font-bold text-green-600">
+          Payment Successful
+        </h1>
 
-      <div className="flex justify-center mt-6">
-        <Link to={"/dashboard/payment-history"}>
-          <button className="btn btn-error">Go to Payment History</button>
-        </Link>
+        <p className="text-sm text-gray-500 mt-2">
+          Your payment has been completed successfully
+        </p>
+
+        {/* Info Box */}
+        <div className="mt-6 space-y-4 text-left">
+
+          <div className="p-3 rounded-lg bg-gray-100">
+            <p className="text-xs text-gray-500">Tracking ID</p>
+            <p className="font-semibold break-all">
+              {paymentInfo?.trackingId || "Loading..."}
+            </p>
+          </div>
+
+          <div className="p-3 rounded-lg bg-gray-100">
+            <p className="text-xs text-gray-500">Transaction ID</p>
+            <p className="font-semibold break-all">
+              {paymentInfo?.transactionId || "Loading..."}
+            </p>
+          </div>
+        </div>
+
+        {/* Button */}
+        <div className="mt-6">
+          <Link to="/dashboard/payment-history">
+            <button className="btn btn-success w-full">
+              Go to Payment History
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

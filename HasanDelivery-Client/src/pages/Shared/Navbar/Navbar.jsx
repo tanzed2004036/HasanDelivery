@@ -93,7 +93,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-sm relative z-50">
+      <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -113,7 +113,10 @@ const Navbar = () => {
                 />{" "}
               </svg>
             </div>
-              <ul className="menu menu-sm dropdown-content absolute bg-base-100 rounded-box z-[999] mt-3 w-52 p-2 shadow">
+            <ul
+              tabIndex="-1"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
               {manueItems}
               <li className="lg:hidden">
                 <Link to="/rider">Be a Rider</Link>
