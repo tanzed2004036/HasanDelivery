@@ -8,7 +8,7 @@ const Footer = () => {
         <aside>
           <Logo></Logo>
           <p className="font-bold">
-            TH Industries Ltd.
+            K. M. Tanzed Hasan Industries Ltd.
             <br />
             Providing reliable service 
           </p>

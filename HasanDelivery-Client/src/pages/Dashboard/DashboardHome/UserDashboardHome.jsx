@@ -10,7 +10,7 @@ export default function UserDashboardHome() {
   return (
     <div className="p-4 md:p-6">
       {/* Welcome */}
-      <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl text-white p-6 shadow-lg">
+      <div className="bg-gradient-to-r from-primary to-teal-600 rounded-2xl text-white p-6 shadow-lg">
         <h1 className="text-2xl md:text-3xl font-bold">
           Welcome to Your Dashboard 👋
         </h1>
