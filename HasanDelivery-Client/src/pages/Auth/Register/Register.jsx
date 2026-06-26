@@ -75,6 +75,7 @@ const Register = () => {
       navigate(from, { replace: true });
     } catch (error) {
       console.log("Register error:", error.message);
+      alert(error.message);
     }
   };
 
