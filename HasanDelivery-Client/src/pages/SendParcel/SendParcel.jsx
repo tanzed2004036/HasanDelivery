@@ -167,7 +167,7 @@ const SendParcel = () => {
                   Sender Email
                 </label>
                 <input
-                  type="tel"
+                  type="email"
                   required
                   {...register("senderEmail")}
                   placeholder="+880 1X XX XXX XXX"
@@ -252,7 +252,7 @@ const SendParcel = () => {
                   Receiver Email
                 </label>
                 <input
-                  type="tel"
+                  type="email"
                   required
                   {...register("receiverEmail")}
                   placeholder=" XX XXX XXX @ XX.com"
